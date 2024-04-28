@@ -4,13 +4,13 @@ import skfuzzy as skf
 import matplotlib.pyplot as plt
 from MFIS_Classes import *
 
-def readFuzzySetsFile(fleName):
+def readFuzzySetsFile(fileName):
     """
     This function reads a file containing fuzzy set descriptions
     and returns a dictionary with all of them
     """
     fuzzySetsDict = FuzzySetsDict() # dictionary to be returned
-    inputFile = open(fleName, 'r')
+    inputFile = open(fileName, 'r')
     line = inputFile.readline()
     while line != '':
         fuzzySet = FuzzySet()   # just one fuzzy set
@@ -36,8 +36,8 @@ def readFuzzySetsFile(fleName):
     inputFile.close()
     return fuzzySetsDict
 
-def readRulesFile():
-    inputFile = open('Files/Rules.txt', 'r')
+def readRulesFile(fileName):
+    inputFile = open(fileName, 'r')
     rules = RuleList()
     line = inputFile.readline()
     while line != '':
@@ -55,8 +55,8 @@ def readRulesFile():
     inputFile.close()
     return rules
 
-def readApplicationsFile():
-    inputFile = open('Files/Applications.txt', 'r')
+def readApplicationsFile(fileName):
+    inputFile = open(fileName, 'r')
     applicationList = []
     line = inputFile.readline()
     while line != '':
