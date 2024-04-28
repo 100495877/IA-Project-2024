@@ -36,24 +36,32 @@ def readFuzzySetsFile(fileName):
     inputFile.close()
     return fuzzySetsDict
 
-def readRulesFile(fileName):
-    inputFile = open(fileName, 'r')
-    rules = RuleList()
-    line = inputFile.readline()
-    while line != '':
-        rule = Rule()
-        line = line.rstrip()
-        elementsList = line.split(', ')
-        rule.ruleName = elementsList[0]
-        rule.consequent = elementsList[1]
-        lhs = []
-        for i in range(2, len(elementsList), 1):
-            lhs.append(elementsList[i])
-        rule.antecedent = lhs
-        rules.append(rule)
-        line = inputFile.readline()
-    inputFile.close()
+"""def readRulesFile(filename):
+    rules = []
+    with open(filename, 'r') as file:
+        for line in file:
+            conditions = line.strip().split(', ')
+            rule = {}
+            for condition in conditions:
+                variable, value = condition.split('=')
+                rule[variable] = value
+            rules.append(rule)
+    return rules"""
+def readRulesFile(filename):
+    rules = []
+    with open(filename, 'r') as file:
+        for line in file:
+            conditions = line.strip().split(', ')
+            rule = {}
+            for condition in conditions:
+                if '=' in condition:
+                    variable, value = condition.split('=')
+                    rule[variable] = value
+                else:
+                    print(f"Warning: Invalid condition '{condition}' in rule '{line.strip()}'. Condition should be in the format 'variable=value'.")
+            rules.append(rule)
     return rules
+
 
 def readApplicationsFile(fileName):
     inputFile = open(fileName, 'r')

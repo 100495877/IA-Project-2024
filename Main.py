@@ -1,6 +1,7 @@
 
 import numpy as np
 from MFIS_Read_Functions import readFuzzySetsFile, readRulesFile, readApplicationsFile
+import skfuzzy as skf
 
 
 def main():
@@ -14,7 +15,7 @@ def main():
         results = evaluateApplication(fuzzy_sets, rules, applications)
         
         # Output results
-        #writeResultsToFile(results)
+        writeResultsToFile(results)
         
     except Exception as e:
         print(f"An error occurred: {e}")
@@ -31,7 +32,7 @@ def evaluateApplication(fuzzySets, rules, application):
         # Apply fuzzy logic:
 
         # 1. Fuzzification: Convert crisp values to degrees of membership for each fuzzy set
-        fuzzification(application, fuzzySets)
+        fuzzification(applicant, fuzzySets)
 
         # 2. Rule Evaluation: Apply the fuzzy rules to the fuzzified inputs
         rule_evaluation(rules, fuzzySets)
@@ -51,13 +52,12 @@ def evaluateApplication(fuzzySets, rules, application):
 
 
 
-''' 
+
 def writeResultsToFile(results, filename="Results.txt"):
     with open(filename, "w") as file:
         for app_id, risk in results.items():
             file.write(f"{app_id}, Risk Level: {risk}\n")
 
-'''
 
 # Mamdani methods
 
