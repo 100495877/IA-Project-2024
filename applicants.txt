@@ -1,0 +1,1 @@
+0001, Age, 45, IncomeLevel, 82, Assets, 38, Amount, 8, Job, 0, History, 1
