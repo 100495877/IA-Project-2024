@@ -59,8 +59,11 @@ def fuzzification(applicant, FuzzySetsDict):
                 if value < fuzzySet[1].x[0] or value > fuzzySet[1].x[-1]:
                     fuzzySet.memDegree = 0  # No membership if out of bounds
                 else:
-                    index = np.where(fuzzySet.x == value)[0][0]  # Find the index of the value in the x array
-                    fuzzySet.memDegree = fuzzySet.y[index]  # Membership degree corresponds to the y value
+                    for x in fuzzySet[1].x: # We go through the x values of the fuzzy set
+                        if value == x: # If the value is in the x values of the fuzzy set
+                            fuzzySet.memDegree = fuzzySet[1].y[fuzzySet[1].x.index(x)] # Membership degree corresponds to the y value
+
+
 
 
 
