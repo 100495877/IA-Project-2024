@@ -13,6 +13,10 @@ class FuzzySet:
     x = []  # list of abscissas, from xmin to xmax, 1 by 1
     y = []  # list of ordinates (float)
     memDegree = 0  # membership degree for the current application
+    a = 0
+    b = 0
+    c = 0
+    d = 0
 
     def printSet(self):
         print("var:       ", self.var)

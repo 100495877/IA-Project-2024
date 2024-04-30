@@ -1,8 +1,8 @@
 import numpy as np
 from MFIS_Read_Functions import readFuzzySetsFile, readRulesFile, readApplicationsFile
 import skfuzzy as skf
-from Main import evaluateApplication
-from Main import fuzzification
+#from Main import evaluateApplication
+#from Main import fuzzification
 
 
 
@@ -16,7 +16,6 @@ def main():
         # Process the applications
         return evaluateApplication(fuzzy_sets, rules, applications)
 
-        
         # Output results
         #writeResultsToFile(results)
 
@@ -49,29 +48,35 @@ def evaluateApplication(fuzzySets, rules, application):
         # reset_membership_degrees(fuzzySets)  # Reset membership degrees for the next application
 
     # Return the compiled results of all applications
-        print (fuzzySets[1].memDegree)
+        print(fuzzySets[1].memDegree)
 
 
 def fuzzification(applicant, FuzzySetsDict):
     k = 1
+
     for var_value in applicant.data:  # var_value is a list of lists. (eg. [age, 35])
         print(k,"th iteration. the var_value = ", var_value)
         variable, value = var_value[0], var_value[1]  # (eg. variable = Age, and value = 35)
+        print(var_value[1])
         for fuzzySet in FuzzySetsDict.items():
             print("This is the fuzzy set of",fuzzySet[0])
             print("And the fuzzy set object is", fuzzySet[1])
-            print("And fuzzySet[1].x is", fuzzySet[1].x)
-            if fuzzySet[0].split('=')[0] == variable:  
+            if fuzzySet[0].split('=')[0] == variable:
+
                 # Match the application variable to the fuzzy set variable
                 # We split the string, so that we only get the variable part (eg. "Age", instead of "Age=young")
-                if value < fuzzySet[1].x[1] or value > fuzzySet[1].x[4]:
-                    print("fuzzySet[1].x[1] is ", fuzzySet[1].x[1], "and fuzzySet[1].x[4] is ", fuzzySet[1].x[4])
+
+                if value < fuzzySet[1].a or value > fuzzySet[1].d:
+                    print("fuzzySet[1].x[1] is ", fuzzySet[1].y[1][0], "and fuzzySet[1].x[-1] is ", fuzzySet[1].y[1][-1])
                     print("The var_value", var_value,"of", variable, "is out of bounds")
                     fuzzySet[1].memDegree = 0  # No membership if out of bounds
                     print("memdegree of fuzzyset", fuzzySet, "was put as 0.")
-                #else:
-                    #index = np.where(fuzzySet.x == value)[0][0]  # Find the index of the value in the x array
-                    #fuzzySet.memDegree = fuzzySet.y[index]  # Membership degree corresponds to the y value
+                else:
+                    for i in fuzzySet[1].x:  # We go through the x values of the fuzzy set
+                        if fuzzySet[1].x[i] <
+                        if value == fuzzySet[1].x[i]:  # If the value is in the x values of the fuzzy set
+                            fuzzySet.memDegree = fuzzySet[1].y[fuzzySet[1].x.index(x)]  # Membership degree corresponds to the y value
+                        i += 1
         k += 1
 #rules = readRulesFile()
 #print(rules[1].antecedent)
@@ -80,3 +85,5 @@ def fuzzification(applicant, FuzzySetsDict):
 #applications = readApplicationsFile()
 #print(applications[0].data[0][1])
 main()
+
+

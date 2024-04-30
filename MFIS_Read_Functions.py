@@ -13,6 +13,7 @@ def readFuzzySetsFile():
     fuzzySetsDict = FuzzySetsDict() # dictionary to be returned
 
     line = inputFile.readline()
+
     while line != '':
         fuzzySet = FuzzySet()   # just one fuzzy set
         elementsList = line.split(', ')
@@ -27,6 +28,12 @@ def readFuzzySetsFile():
         b = int(elementsList[4])
         c = int(elementsList[5])
         d = int(elementsList[6])
+
+        fuzzySet.a = a
+        fuzzySet.b = b
+        fuzzySet.c = c
+        fuzzySet.d = d
+
         x = np.arange(xmin,xmax,1)
         y = skf.trapmf(x, [a, b, c, d])
         fuzzySet.x = x

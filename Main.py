@@ -12,7 +12,9 @@ def main():
         applications = readApplicationsFile()
 
         # Process the applications
-        results = evaluateApplication(fuzzy_sets, rules, applications)
+        #results = evaluateApplication(fuzzy_sets, rules, applications)
+        #for fuzzy in fuzzy_sets.items():
+        #print(fuzzy[1].y[0])
 
         # Output results
         #writeResultsToFile(results)
