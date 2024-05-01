@@ -25,12 +25,12 @@ def main():
 
 
 
-def evaluateApplication(fuzzySets, rules, application):
+def evaluateApplication(fuzzySets, rules, applications):
     # Initialize a results dictionary
     results = {}
     
     # Process each application using the fuzzy logic
-    for applicant in application:
+    for applicant in applications:
         # Apply fuzzy logic:
 
         # 1. Fuzzification: Convert crisp values to degrees of membership for each fuzzy set
@@ -53,19 +53,13 @@ def evaluateApplication(fuzzySets, rules, application):
     return results
 
 def fuzzification(applicant, FuzzySetsDict):
-    for var_value in applicant.data: # var_value is a list of lists. (eg. [age, 35])
-        variable, value = var_value[0], var_value[1] # (eg. variable = Age, and value = 35)
+    for var_value in applicant.data:  # var_value is a sub-list. (eg. [age, 35])
+        variable, value = var_value[0], var_value[1]  # (eg. variable = Age, and value = 35)
         for fuzzySet in FuzzySetsDict.items():
-            if fuzzySet[0] == variable:  # Match the application variable to the fuzzy set variable
-                # Assuming linear membership within ranges defined by a, b, c, d
-                if value < fuzzySet[1].x[0] or value > fuzzySet[1].x[-1]:
-                    fuzzySet.memDegree = 0  # No membership if out of bounds
-                else:
-                    for x in fuzzySet[1].x: # We go through the x values of the fuzzy set
-                        if value == x: # If the value is in the x values of the fuzzy set
-                            fuzzySet.memDegree = fuzzySet[1].y[fuzzySet[1].x.index(x)] # Membership degree corresponds to the y value
-
-
+            if fuzzySet[0].split('=')[0] == variable:
+                # Update degree of membership in the set object´s memDegree attribute.
+                fuzzySet[1].memDegree = skf.interp_membership(fuzzySet[1].x, fuzzySet[1].y, value)
+        
 
 
 

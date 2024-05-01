@@ -23,12 +23,12 @@ def main():
         print(f"An error occurred: {e}")
 
 
-def evaluateApplication(fuzzySets, rules, application):
+def evaluateApplication(fuzzySets, rules, applications):
     # Initialize a results dictionary
 
 
     # Process each application using the fuzzy logic
-    for applicant in application:
+    for applicant in applications:
         # Apply fuzzy logic:
 
         # 1. Fuzzification: Convert crisp values to degrees of membership for each fuzzy set
@@ -51,33 +51,15 @@ def evaluateApplication(fuzzySets, rules, application):
         print(fuzzySets[1].memDegree)
 
 
+
 def fuzzification(applicant, FuzzySetsDict):
-    k = 1
-
-    for var_value in applicant.data:  # var_value is a list of lists. (eg. [age, 35])
-        print(k,"th iteration. the var_value = ", var_value)
+    for var_value in applicant.data:  # var_value is a sub-list. (eg. [age, 35])
         variable, value = var_value[0], var_value[1]  # (eg. variable = Age, and value = 35)
-        print(var_value[1])
         for fuzzySet in FuzzySetsDict.items():
-            print("This is the fuzzy set of",fuzzySet[0])
-            print("And the fuzzy set object is", fuzzySet[1])
             if fuzzySet[0].split('=')[0] == variable:
-
-                # Match the application variable to the fuzzy set variable
-                # We split the string, so that we only get the variable part (eg. "Age", instead of "Age=young")
-
-                if value < fuzzySet[1].a or value > fuzzySet[1].d:
-                    print("fuzzySet[1].x[1] is ", fuzzySet[1].y[1][0], "and fuzzySet[1].x[-1] is ", fuzzySet[1].y[1][-1])
-                    print("The var_value", var_value,"of", variable, "is out of bounds")
-                    fuzzySet[1].memDegree = 0  # No membership if out of bounds
-                    print("memdegree of fuzzyset", fuzzySet, "was put as 0.")
-                else:
-                    for i in fuzzySet[1].x:  # We go through the x values of the fuzzy set
-                        if fuzzySet[1].x[i] <
-                        if value == fuzzySet[1].x[i]:  # If the value is in the x values of the fuzzy set
-                            fuzzySet.memDegree = fuzzySet[1].y[fuzzySet[1].x.index(x)]  # Membership degree corresponds to the y value
-                        i += 1
-        k += 1
+                # Update degree of membership in the set object´s memDegree attribute.
+                fuzzySet[1].memDegree = skf.interp_membership(fuzzySet[1].x, fuzzySet[1].y, value)
+        
 #rules = readRulesFile()
 #print(rules[1].antecedent)
 #print(rules[1].consequent)
