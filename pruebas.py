@@ -27,7 +27,7 @@ def main():
 
 def evaluateApplication(InputFuzzySets, OutputFuzzySets, rules, applications):
     # Initialize a results dictionary
-
+    results = {}
 
     # Process each application using the fuzzy logic
     for applicant in applications:
@@ -46,16 +46,17 @@ def evaluateApplication(InputFuzzySets, OutputFuzzySets, rules, applications):
         print(output_fuzzy_set) #Debugging purposes
 
 
-
+        l = list(range(0, 100))
         # 4. Defuzzification: Convert the result of fuzzy inference to a crisp output
-        # crisp_value = defuzzification(output_fuzzy_set, list(fuzzySets.values())[0].x)
+        crisp_value = defuzzification(output_fuzzy_set, l)
 
-        # results[applicant.appId] = crisp_value  # Directly assigning the crisp value
+        results[applicant.appId] = crisp_value  # Directly assigning the crisp value
 
         # reset_membership_degrees(fuzzySets)  # Reset membership degrees for the next application
 
     # Return the compiled results of all applications
         #print(fuzzySets[1].memDegree)
+
 
 
 
@@ -79,12 +80,12 @@ def rule_evaluation(rules, fuzzySetsDict, RisksfuzzySetsDict):
            consequent_set = RisksfuzzySetsDict[rule.consequent]
            consequent_set.memDegree = max(consequent_set.memDegree, min_degree)  # Use max to handle multiple rules affecting the same consequent.
 
-def aggregate_outputs(RisksfuzzySetsDict):
+def aggregate_outputs(fuzzySetsDict):
     # Initialize an array of zeros. Used to store the aggregated output fuzzy set.
-    output_fuzzy_set = np.zeros_like(list(RisksfuzzySetsDict.values())[0].x)
+    output_fuzzy_set = np.zeros_like(list(fuzzySetsDict.values())[0].x)
 
     # Loop over each fuzzy set in the dictionary
-    for fuzzySet in RisksfuzzySetsDict.items():
+    for fuzzySet in fuzzySetsDict.items():
         # For each fuzzy set, calculate the membership function value multiplied by the membership degree.
         # This gives the contribution of this fuzzy set to the output fuzzy set.
 
@@ -104,6 +105,11 @@ def aggregate_outputs(RisksfuzzySetsDict):
 
     # Return the aggregated output fuzzy set.
     return output_fuzzy_set
+
+
+def defuzzification(output_fuzzy_set, l: list):
+    centroid = np.sum(np.array(l) * output_fuzzy_set) / np.sum(output_fuzzy_set)
+    return centroid
 
 
 
