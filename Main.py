@@ -9,7 +9,7 @@ def main():
         # Load the data
         input_fuzzy_sets = readFuzzySetsFile('InputVarSets.txt')
         output_fuzzy_sets = readFuzzySetsFile('Risks.txt')
-        rules = readRulesFile('Rules.txt')
+        rules = readRulesFile('NewRules.txt')
         applications = readApplicationsFile('Applications.txt')
 
 
