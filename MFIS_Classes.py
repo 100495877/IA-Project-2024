@@ -36,6 +36,8 @@ class Rule:
     strength = 0  # float
     consequentX = []  # output fuzzySet, abscissas
     consequentY = []  # output fuzzySet, ordinates
+    op1 = 1 #AND
+    op2 = 1 #AND
 
     def printRule(self):
         print("ruleName: ", self.ruleName)

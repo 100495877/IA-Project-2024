@@ -50,11 +50,21 @@ def readRulesFile(fileName):
         rule.ruleName = elementsList[0]
         rule.consequent = elementsList[1]
         lhs = []
+        counter = 1
         for i in range(2, len(elementsList), 1):
+            #if elementsList[i][0] != "OP1" and elementsList[i][0] != "OP2":
             lhs.append(elementsList[i])
+            counter += 1
         rule.antecedent = lhs
+        if counter > 5:
+            if rule.antecedent[3] == "OP1=OR":
+                rule.op1 = 0
+            if rule.antecedent[4] == "OP2=OR":
+                rule.op2 = 0
         rules.append(rule)
         line = inputFile.readline()
+        if rule.antecedent == "OP1=OR":
+            rule.op1 = 0
     inputFile.close()
     return rules
 

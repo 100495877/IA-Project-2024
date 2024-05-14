@@ -9,7 +9,7 @@ def main():
         # Load the data
         input_fuzzy_sets = readFuzzySetsFile('InputVarSets.txt')
         output_fuzzy_sets = readFuzzySetsFile('Risks.txt')
-        rules = readRulesFile('NewRules.txt')
+        rules = readRulesFile('NewRules')
         applications = readApplicationsFile('Applications.txt')
 
 
@@ -66,9 +66,14 @@ def fuzzification(applicant, FuzzySetsDict):
                 fuzzySet[1].memDegree = skf.interp_membership(fuzzySet[1].x, fuzzySet[1].y, value)
 
 
+# if AND, AND: min(x, y, z) <-- ahora estamos aquí
+# if AND, OR: min(x, max(y, z))
+#if OR, AND: max(x, min(y, z))
+# if OR, OR: maz(x, y, z)
 def rule_evaluation(rules, fuzzySetsDict, RisksfuzzySetsDict):
     for rule in rules:
         min_degree = float('inf')  # Start with an infinitely large number
+        max_degree = 0
         for antecedent in rule.antecedent:
             if antecedent in fuzzySetsDict and fuzzySetsDict[antecedent].memDegree < min_degree:
                min_degree = fuzzySetsDict[antecedent].memDegree
