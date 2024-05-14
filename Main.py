@@ -74,13 +74,22 @@ def rule_evaluation(rules, fuzzySetsDict, RisksfuzzySetsDict):
     for rule in rules:
         min_degree = float('inf')  # Start with an infinitely large number
         max_degree = 0
-        for antecedent in rule.antecedent:
-            if antecedent in fuzzySetsDict and fuzzySetsDict[antecedent].memDegree < min_degree:
-               min_degree = fuzzySetsDict[antecedent].memDegree
-        if min_degree != float('inf'):
-           rule.strength = min_degree  # The strength of the rule is the minimum membership degree
-           consequent_set = RisksfuzzySetsDict[rule.consequent]
-           consequent_set.memDegree = max(consequent_set.memDegree, min_degree)  # Use max to handle multiple rules affecting the same consequent.
+        if rule.op1 == 1 and rule.op2 == 1: #AND, AND
+            for antecedent in rule.antecedent:
+                if antecedent in fuzzySetsDict and fuzzySetsDict[antecedent].memDegree < min_degree:
+                   min_degree = fuzzySetsDict[antecedent].memDegree
+            if min_degree != float('inf'):
+               rule.strength = min_degree  # The strength of the rule is the minimum membership degree
+               consequent_set = RisksfuzzySetsDict[rule.consequent]
+               consequent_set.memDegree = max(consequent_set.memDegree, min_degree)  # Use max to handle multiple rules affecting the same consequent.
+        if rule.op1 == 0 and rule.op2 == 0: # OR, OR
+            for antecedent in rule.antecedent:
+                if antecedent in fuzzySetsDict and fuzzySetsDict[antecedent].memDegree > max_degree:
+                   max_degree = fuzzySetsDict[antecedent].memDegree
+            if max_degree != 0:
+               rule.strength = max_degree  # The strength of the rule is the minimum membership degree
+               consequent_set = RisksfuzzySetsDict[rule.consequent]
+               consequent_set.memDegree = max(consequent_set.memDegree, min_degree)  # Use max to handle multiple rules affecting the same consequent.
 
 def aggregate_outputs(fuzzySetsDict):
     # Initialize an array of zeros. Used to store the aggregated output fuzzy set.

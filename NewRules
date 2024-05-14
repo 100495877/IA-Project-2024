@@ -1,4 +1,4 @@
-Rule01, Risk=LowR, IncomeLevel=Hig, Assets=Abundant, Amount=Small, OP1=OR, OP2=OR
+Rule01, Risk=LowR, IncomeLevel=Hig, Assets=Abundant, Amount=Small, OP1=AND, OP2=AND
 Rule02, Risk=LowR, IncomeLevel=Hig, Assets=Abundant, Amount=Medium
 Rule03, Risk=MediumR, IncomeLevel=Hig, Assets=Abundant, Amount=Big
 Rule04, Risk=MediumR, IncomeLevel=Hig, Assets=Abundant, Amount=VeryBig, Job=Stable
