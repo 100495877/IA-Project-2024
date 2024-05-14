@@ -82,14 +82,45 @@ def rule_evaluation(rules, fuzzySetsDict, RisksfuzzySetsDict):
                rule.strength = min_degree  # The strength of the rule is the minimum membership degree
                consequent_set = RisksfuzzySetsDict[rule.consequent]
                consequent_set.memDegree = max(consequent_set.memDegree, min_degree)  # Use max to handle multiple rules affecting the same consequent.
-        if rule.op1 == 0 and rule.op2 == 0: # OR, OR
+        elif rule.op1 == 0 and rule.op2 == 0: # OR, OR
             for antecedent in rule.antecedent:
                 if antecedent in fuzzySetsDict and fuzzySetsDict[antecedent].memDegree > max_degree:
                    max_degree = fuzzySetsDict[antecedent].memDegree
             if max_degree != 0:
                rule.strength = max_degree  # The strength of the rule is the minimum membership degree
                consequent_set = RisksfuzzySetsDict[rule.consequent]
-               consequent_set.memDegree = max(consequent_set.memDegree, min_degree)  # Use max to handle multiple rules affecting the same consequent.
+               consequent_set.memDegree = min(consequent_set.memDegree, max_degree)  # Use min to handle multiple rules affecting the same consequent.
+        elif rule.op1 == 0 and rule.op2 == 1: #OR, AND
+            i = 0
+            x = 0
+            for antecedent in rule.antecedent:
+                if i == 0:
+                    x = fuzzySetsDict[antecedent].memDegree
+                    i += 1
+                else:
+                    if antecedent in fuzzySetsDict and fuzzySetsDict[antecedent].memDegree < min_degree:
+                        min_degree = fuzzySetsDict[antecedent].memDegree  # min(y, z)
+                degree = max(x, min_degree)
+                if degree != 0:
+                    rule.strength = degree
+                    consequent_set = RisksfuzzySetsDict[rule.consequent]
+                    consequent_set.memDegree = min(consequent_set.memDegree, degree)
+
+        #elif rule.op1 == 1 and rule.op2 == 0: #AND, OR
+            #i = 0
+           # x = float('inf')
+            #for antecedent in rule.antecedent:
+                #if i == 0:
+                    #x = fuzzySetsDict[antecedent].memDegree
+                #else:
+                    #if antecedent in fuzzySetsDict and fuzzySetsDict[antecedent].memDegree > max_degree:
+                        #max_degree = fuzzySetsDict[antecedent].memDegree
+                #degree = min(x, max_degree)
+                #if degree != float('inf'):
+                    #rule.strength = degree
+                    #consequent_set = RisksfuzzySetsDict[rule.consequent]
+                    #consequent_set.memDegree = max(consequent_set.memDegree, degree)
+
 
 def aggregate_outputs(fuzzySetsDict):
     # Initialize an array of zeros. Used to store the aggregated output fuzzy set.
