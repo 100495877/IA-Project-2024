@@ -1,33 +1,33 @@
-Rule01, Risk=LowR, IncomeLevel=Hig, Assets=Abundant, Amount=Small, OP1=OR, OP2=AND
-Rule02, Risk=LowR, IncomeLevel=Hig, Assets=Abundant, Amount=Medium
-Rule03, Risk=MediumR, IncomeLevel=Hig, Assets=Abundant, Amount=Big
+Rule01, Risk=LowR, IncomeLevel=Hig, Assets=Abundant, Amount=Small, OP1=AND, OP2=OR
+Rule02, Risk=LowR, IncomeLevel=Hig, Assets=Abundant, Amount=Medium, OP1=AND, OP2=AND
+Rule03, Risk=MediumR, IncomeLevel=Hig, Assets=Abundant, Amount=Big, OP1=OR, OP2=OR
 Rule04, Risk=MediumR, IncomeLevel=Hig, Assets=Abundant, Amount=VeryBig, Job=Stable
-Rule05, Risk=HighR, Age=Young, Amount=Big
-Rule06, Risk=HighR, Age=Elder, Amount=Big
-Rule07, Risk=HighR, IncomeLevel=Low, Amount=VeryBig
-Rule08, Risk=HighR, IncomeLevel=Med, Amount=VeryBig
-Rule09, Risk=LowR, Amount=Medium, Job=Stable, History=Good
-Rule10, Risk=MediumR, Amount=Big, Job=Stable, History=Good
-Rule11, Risk=HighR, IncomeLevel=Low, Job=Unstable
-Rule12, Risk=HighR, IncomeLevel=Med, Amount=Big, History=Poor
-Rule13, Risk=HighR, IncomeLevel=Low, Amount=Big, History=Poor
-Rule14, Risk=LowR, Assets=Scarce, Amount=Small, History=Good
-Rule15, Risk=LowR, Assets=Scarce, Amount=Medium, History=Good
-Rule16, Risk=MediumR, Age=Adult, IncomeLevel=Hig, Amount=Medium
-Rule17, Risk=MediumR, Age=Adult, Assets=Abundant, Amount=Medium
-Rule18, Risk=MediumR, Assets=Moderate, Amount=Medium, Job=Stable
-Rule19, Risk=MediumR, Age=Young, IncomeLevel=Low
-Rule20, Risk=HighR, Age=Young, IncomeLevel=Med
-Rule21, Risk=MediumR, Age=Young, Assets=Moderate
-Rule22, Risk=HighR, Age=Young, Assets=Scarce
-Rule23, Risk=MediumR, Age=Young, Amount=Big
-Rule24, Risk=HighR, Age=Young, Amount=VeryBig
-Rule25, Risk=HighR, Age=Young, Job=Unstable
-Rule26, Risk=MediumR, Age=Young, History=Poor
-Rule27, Risk=HighR, Age=Young, History=Standard
-Rule28, Risk=MediumR, Age=Elder, IncomeLevel=Low
-Rule29, Risk=HighR, Age=Elder, IncomeLevel=Med
-Rule30, Risk=MediumR, Age=Elder, Assets=Moderate
+Rule05, Risk=HighR, Age=Young, Amount=Big, OP1=OR, OP2=AND
+Rule06, Risk=HighR, Age=Elder, Amount=Big, OP1=AND, OP2=OR
+Rule07, Risk=HighR, IncomeLevel=Low, Amount=VeryBig, OP1=AND, OP2=AND
+Rule08, Risk=HighR, IncomeLevel=Med, Amount=VeryBig, OP1=OR, OP2=OR
+Rule09, Risk=LowR, Amount=Medium, Job=Stable, History=Good, OP1=OR, OP2=AND
+Rule10, Risk=MediumR, Amount=Big, Job=Stable, History=Good, OP1=AND, OP2=OR
+Rule11, Risk=HighR, IncomeLevel=Low, Job=Unstable, OP1=AND, OP2=AND
+Rule12, Risk=HighR, IncomeLevel=Med, Amount=Big, History=Poor, OP1=OR, OP2=AND
+Rule13, Risk=HighR, IncomeLevel=Low, Amount=Big, History=Poor, OP1=OR, OP2=OR
+Rule14, Risk=LowR, Assets=Scarce, Amount=Small, History=Good, OP1=AND, OP2=AND
+Rule15, Risk=LowR, Assets=Scarce, Amount=Medium, History=Good, OP1=AND, OP2=OR
+Rule16, Risk=MediumR, Age=Adult, IncomeLevel=Hig, Amount=Medium, OP1=OR, OP2=AND
+Rule17, Risk=MediumR, Age=Adult, Assets=Abundant, Amount=Medium, OP1=OR, OP2=OR
+Rule18, Risk=MediumR, Assets=Moderate, Amount=Medium, Job=Stable, OP1=AND, OP2=AND
+Rule19, Risk=MediumR, Age=Young, IncomeLevel=Low, OP1=AND, OP2=OR
+Rule20, Risk=HighR, Age=Young, IncomeLevel=Med, OP1=OR, OP2=AND
+Rule21, Risk=MediumR, Age=Young, Assets=Moderate, OP1=OR, OP2=OR
+Rule22, Risk=HighR, Age=Young, Assets=Scarce, OP1=AND, OP2=AND
+Rule23, Risk=MediumR, Age=Young, Amount=Big, OP1=AND, OP2=OR
+Rule24, Risk=HighR, Age=Young, Amount=VeryBig, OP1=OR, OP2=AND
+Rule25, Risk=HighR, Age=Young, Job=Unstable, OP1=OR, OP2=OR
+Rule26, Risk=MediumR, Age=Young, History=Poor, OP1=AND, OP2=AND
+Rule27, Risk=HighR, Age=Young, History=Standard, OP1=AND, OP2=OR
+Rule28, Risk=MediumR, Age=Elder, IncomeLevel=Low, OP1=OR, OP2=AND
+Rule29, Risk=HighR, Age=Elder, IncomeLevel=Med, OP1=OR, OP2=OR
+Rule30, Risk=MediumR, Age=Elder, Assets=Moderate, OP1=AND, OP2=AND
 Rule31, Risk=HighR, Age=Elder, Assets=Scarce
 Rule32, Risk=MediumR, Age=Elder, Amount=Big
 Rule33, Risk=HighR, Age=Elder, Amount=VeryBig

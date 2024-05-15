@@ -66,10 +66,11 @@ def fuzzification(applicant, FuzzySetsDict):
                 fuzzySet[1].memDegree = skf.interp_membership(fuzzySet[1].x, fuzzySet[1].y, value)
 
 
+
 # if AND, AND: min(x, y, z) <-- ahora estamos aquí
 # if AND, OR: min(x, max(y, z))
 #if OR, AND: max(x, min(y, z))
-# if OR, OR: maz(x, y, z)
+# if OR, OR: max(x, y, z)
 def rule_evaluation(rules, fuzzySetsDict, RisksfuzzySetsDict):
     for rule in rules:
         min_degree = float('inf')  # Start with an infinitely large number
@@ -106,20 +107,20 @@ def rule_evaluation(rules, fuzzySetsDict, RisksfuzzySetsDict):
                     consequent_set = RisksfuzzySetsDict[rule.consequent]
                     consequent_set.memDegree = min(consequent_set.memDegree, degree)
 
-        #elif rule.op1 == 1 and rule.op2 == 0: #AND, OR
-            #i = 0
-           # x = float('inf')
-            #for antecedent in rule.antecedent:
-                #if i == 0:
-                    #x = fuzzySetsDict[antecedent].memDegree
-                #else:
-                    #if antecedent in fuzzySetsDict and fuzzySetsDict[antecedent].memDegree > max_degree:
-                        #max_degree = fuzzySetsDict[antecedent].memDegree
-                #degree = min(x, max_degree)
-                #if degree != float('inf'):
-                    #rule.strength = degree
-                    #consequent_set = RisksfuzzySetsDict[rule.consequent]
-                    #consequent_set.memDegree = max(consequent_set.memDegree, degree)
+        elif rule.op1 == 1 and rule.op2 == 0: #AND, OR
+            i = 0
+            x = float('inf')
+            for antecedent in rule.antecedent:
+                if i == 0:
+                    x = fuzzySetsDict[antecedent].memDegree
+                else:
+                    if antecedent in fuzzySetsDict and fuzzySetsDict[antecedent].memDegree > max_degree:
+                        max_degree = fuzzySetsDict[antecedent].memDegree
+                degree = min(x, max_degree)
+                if degree != float('inf'):
+                    rule.strength = degree
+                    consequent_set = RisksfuzzySetsDict[rule.consequent]
+                    consequent_set.memDegree = max(consequent_set.memDegree, degree)
 
 
 def aggregate_outputs(fuzzySetsDict):
